@@ -1,51 +1,38 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react'
+import React from 'react';
 import { useDataContext } from '../dataProvider';
-// interface Spacecraft {
-//   id: string;
-//   name: string;
-// }
 
-const page: React.FC = () => {
-  const {data} = useDataContext()
-  console.log(data, "spacecraft data")
-  return (
-    <div className="w-full">
-      {
-        data?.map((item:{name: string})=>{
-          return <li>{item.name}</li>
-        })
-      }
-      {/* {loading ? (
-        <p>Loading...</p>
-      ) : ( */}
-        {/* <div>
-          <table className="table  border shadow-md rounded-lg w-[100%]">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 border-b">ID</th>
-                <th className="px-4 py-2 border-b">Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {spaceData.map((item, index) => (
-                <tr key={index} className="hover:bg-orange-600">
-                  <td className="px-4 py-2 border-b">{item.id}</td>
-                  <td className="px-4 py-2 border-b">{item.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div> */}
-      {/* )} */}
-    </div>
-
-
-  )
+interface SpacecraftData {
+  id: number;
+  name: string;
 }
 
-export default page
+const Page: React.FC = () => {
+  const { data } = useDataContext();
 
+  // console.log(data, "spacecraft data");
 
+  return (
+    <div className="w-full p-4 flex justify-center text-white">
+      <table className="min-w-full table-auto ">
+        <thead>
+          <tr className='bg-yellow-800 text-xl'>
+            <th className="border border-gray-300 h-[10vh]  px-4 py-2 text-center">ID</th>
+            <th className="border border-gray-300 px-4 py-2 text-center">Name</th>
+          </tr>
+        </thead>
+        <tbody >
+          {data?.map((item: SpacecraftData) => (
+            <tr key={item.id} className='h-[10vh]'>
+              <td className="border border-gray-300 px-4 py-2 text-center">{item.id}</td>
+              <td className="border border-gray-300 px-4 py-2 text-center">{item.name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
+export default Page;

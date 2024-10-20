@@ -22,7 +22,7 @@ const Layout: React.FC<DashboardChildren> = ({ children }) => {
                     <div className="w-[20%] bg-yellow-800 sticky top-10 z-10">
                         <Sidebar />
                     </div>
-                    <div className="w-[80%] bg-orange-400 overflow-auto">
+                    <div className="w-[80%] bg-black overflow-auto">
                         {children}
                     </div>
                 </div>

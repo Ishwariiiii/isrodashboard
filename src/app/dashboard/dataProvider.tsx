@@ -23,7 +23,7 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         try {
             setLoading(true);
             const response = await axios.get("https://isro.vercel.app/api/spacecrafts"); 
-            debugger
+            // console.log(response.data)
             setData(response.data.spacecrafts);
         } catch (err) {
             setError("An unknown error occurred");
@@ -37,7 +37,8 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         try {
             setLoading(true);
             const response = await axios.get("https://isro.vercel.app/api/customer_satellites");
-            setData(response.data);
+             // console.log(response.data)
+            setData(response.data.customer_satellites);
         } catch (err) {
             setError("An unknown error occurred");
         } finally {
@@ -50,8 +51,8 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         try {
             setLoading(true);
             const response = await axios.get("https://isro.vercel.app/api/launchers");
-            console.log(response, "Launcher data");
-            setData(response.data);
+            // console.log(response, "Launcher data");
+            setData(response.data.launchers);
         } catch (err) {
             setError("An unknown error occurred");
         } finally {
@@ -64,8 +65,8 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         try {
             setLoading(true);
             const response = await axios.get("https://isro.vercel.app/api/centres");
-            console.log(response, "Center data");
-            setData(response.data);
+            // console.log(response, "Center data");
+            setData(response.data.centres);
         } catch (err) {
             setError("An unknown error occurred");
         } finally {

@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="h-16 bg-blue-950 shadow-md">
             <nav className="flex items-center justify-between h-full px-6">
                 <div className='flex items-center'>
-                    <Image src={logo} alt='ISRO LOGO' width={150} height={50} />
+                    <Image src={logo} alt='ISRO LOGO' width={150} height={150} priority/>
                     <h1 className="text-2xl font-bold ml-0 text-white">ISRO Dashboard</h1>
                 </div>
 
