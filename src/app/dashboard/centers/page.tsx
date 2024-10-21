@@ -1,6 +1,7 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDataContext } from '../dataProvider';
+
 interface CentersData {
   id: number
   name: string
@@ -8,35 +9,68 @@ interface CentersData {
   State: string
 }
 
-const page: React.FC = () => {
-  const { data } = useDataContext()
-  // console.log(data, "centres data")
+const Page: React.FC = () => {
+  const { data, loading } = useDataContext()
+  const [searchData, setSearchData] = useState('');
+  const [filteredData, setFilteredData] = useState<CentersData[]>([]);
+
+  const handleSearchData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchData(e.target.value);
+  };
+
+  useEffect(() => {
+    if (searchData) {
+      setFilteredData(
+        data?.filter((item: CentersData) =>
+          item.Place.toLowerCase().includes(searchData.toLowerCase())
+        ) || []
+      );
+    } else {
+      setFilteredData(data || []);
+    }
+  }, [searchData, data]);
+
+  if (loading) {
+    return <p className="text-white">Loading...</p>;
+  }
 
   return (
-    <div className="w-full p-4 flex justify-center text-white">
-      <h1>Centers Data</h1>
+    <div className="w-full p-6 flex flex-col items-center text-white">
+      <div className="flex items-center justify-between w-full max-w-[800px] mb-6">
+        <h1 className="text-4xl font-bold text-yellow-500">ISRO Centers Data</h1>
+        <input
+          type="text"
+          placeholder="Search here..."
+          value={searchData}
+          onChange={handleSearchData}
+          className="p-2 rounded border border-gray-300 h-[40px] text-black w-full max-w-[300px] ml-4"
+        />
+      </div>
 
-      <table className="min-w-full table-auto ">
-        <thead>
-          <tr className='bg-yellow-800 text-xl border-gray-300 border h-[10vh] px-4 py-2 text-center '>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Place</th>
-            <th>State</th>
-          </tr>
-        </thead>
-        <tbody >
-          {data?.map((item: CentersData) => (
-            <tr key={item.id} className='h-[10vh] border-gray-300 border px-4 py-2 text-center '>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.Place}</td>
-              <td>{item.State}</td>
+      <div className="overflow-x-auto w-full">
+        <table className="min-w-full table-auto bg-gray-800 shadow-lg rounded-lg">
+          <thead>
+            <tr className="bg-yellow-600 text-xl text-white border-gray-300 border">
+              <th className="px-6 py-4">ID</th>
+              <th className="px-6 py-4">Name</th>
+              <th className="px-6 py-4">Place</th>
+              <th className="px-6 py-4">State</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData?.map((item: CentersData) => (
+              <tr key={item.id} className="text-center bg-gray-700 border-b border-gray-500 hover:bg-gray-600">
+                <td className="px-6 py-4">{item.id}</td>
+                <td className="px-6 py-4">{item.name}</td>
+                <td className="px-6 py-4">{item.Place}</td>
+                <td className="px-6 py-4">{item.State}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
-export default page
+
+export default Page;

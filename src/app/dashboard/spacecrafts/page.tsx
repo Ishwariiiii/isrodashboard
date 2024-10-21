@@ -1,42 +1,22 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { useDataContext } from '../dataProvider'
+import React, { useState } from 'react';
+import { useDataContext } from '../dataProvider';
+import SearchData from '../components/SearchData';
 
 const Page: React.FC = () => {
-  const { data } = useDataContext()
-  const [searchData, setSearchData] = useState('')
-  const [filteredData, setFilteredData] = useState([])
-
-  // console.log(data, "spacecraft data")
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchData(e.target.value)
-  }
-  useEffect(() => {
-    if (searchData) {
-      setFilteredData(data?.filter((item: { name: string }) =>
-        item.name.toLowerCase().includes(searchData.toLowerCase())
-      ))
-    }
-    else {
-      setFilteredData(data)
-    }
-  }, [searchData, data, filteredData])
+  const { data } = useDataContext(); 
+  const [filteredData, setFilteredData] = useState(data || []); // State to hold filtered data
 
   return (
     <div className="w-full p-4 flex flex-col items-center text-white">
-      <h1>Spacecrafts data</h1>
-      <input
-        type="text"
-        placeholder="Search here....."
-        value={searchData}
-        onChange={handleSearch}
-        className="mb-4 p-2 rounded border border-gray-300 w-full max-w-[400px] h-[40px] text-black"
-      />
+      <div className="flex items-center justify-between w-full max-w-[800px] mb-4">
+        <h1 className="text-4xl font-bold text-yellow-500">Spacecrafts Data</h1>
+        <SearchData data={data} setFilteredData={setFilteredData} />
+      </div>
 
-      <table className="min-w-full table-auto mt-4">
+      <table className="min-w-full table-auto mt-4 bg-gray-800 shadow-lg rounded-lg">
         <thead>
-          <tr className='bg-yellow-800 text-xl border-gray-300 border h-[10vh]  px-4 py-2 text-center'>
+          <tr className='bg-yellow-800 text-xl border-gray-300 border h-[10vh] px-4 py-2 text-center'>
             <th>ID</th>
             <th>Name</th>
           </tr>
@@ -51,6 +31,7 @@ const Page: React.FC = () => {
         </tbody>
       </table>
     </div>
-  )
-}
-export default Page
+  );
+};
+
+export default Page;
