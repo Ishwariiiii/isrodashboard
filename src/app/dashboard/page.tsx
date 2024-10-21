@@ -1,14 +1,17 @@
-"use client"
+import React from 'react'
 
-const Dashboard = () => {
+const page = () => {
     return (
-        <div >
-
-            <div >
-        
+        <div className="h-[90%] flex items-center justify-center">
+            <div className="text-white text-center space-y-4 border-4 border-white border-solid w-[55%] p-4 h-[60%] flex items-center justify-center">
+                <div>
+                    <p>ISRO is the space agency under the Department <br /> of Space of Government of India,
+                        headquartered in the city of Bengaluru, Karnataka.</p>
+                    <p>Its vision is to harness space technology for national development, while pursuing space science research and planetary exploration.</p>
+                </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Dashboard;
+export default page

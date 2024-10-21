@@ -13,12 +13,10 @@ const Navbar = () => {
                     <Image src={logo} alt='ISRO LOGO' width={150} height={150} priority/>
                     <h1 className="text-2xl font-bold ml-0 text-white">ISRO Dashboard</h1>
                 </div>
-
                 <div>
                     <button 
                         className="rounded-md text-white bg-red-500 hover:bg-red-600 transition duration-300 p-2"
-                        onClick={() => router.push("/")}
-                    >
+                        onClick={() => router.push("/")}>
                         Logout
                     </button>
                 </div>
