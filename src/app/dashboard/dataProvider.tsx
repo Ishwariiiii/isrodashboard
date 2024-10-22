@@ -23,7 +23,7 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         try {
             setLoading(true)
             const response = await axios.get("https://isro.vercel.app/api/spacecrafts")
-            // console.log(response.data.spacecrafts)
+            // console.log(response)
             setData(response.data.spacecrafts)
         } catch (err) {
             setError("An unknown error occure")

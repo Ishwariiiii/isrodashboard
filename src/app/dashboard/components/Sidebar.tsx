@@ -1,11 +1,23 @@
 "use client";
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDataContext } from '../dataProvider'
 
 const Sidebar = () => {
     const router = useRouter()
     const { centers, launchers, satellites, spacecraft } = useDataContext()
+
+    useEffect(() => {
+        if (window.location.href.includes("spacecraft")) {
+            spacecraft()
+        } else if (window.location.href.includes("launchers")) {
+            launchers()
+        } else if (window.location.href.includes("satellites")) {
+            satellites()
+        } else if (window.location.href.includes("centers")) {
+            centers()
+        }
+    }, [])
 
     const spacecraftData = () => {
         router.push("/dashboard/spacecrafts")
